@@ -15,6 +15,7 @@ export async function GET() {
       link: `${slugify(data)}`,
       title: data.title,
       description: data.description,
+      categories: data.tags,
       pubDate: new Date(data.pubDatetime),
     })),
   });
