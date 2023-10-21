@@ -1,0 +1,9 @@
+---
+export interface Props {
+  site: string;
+  dataId: string;
+}
+
+const { dataId, site } = Astro.props;
+---
+<script async src={site} data-website-id={dataId}></script>
