@@ -2,7 +2,7 @@
 author: Dan Isaacs
 pubDatetime: 2022-01-14T15:22:00Z
 title: Optimizely Data Platform (ODP) - Tracking and Usage Examples
-postSlug: odp-trackingandusage
+postSlug: optimizely-data-platform-odp-tracking-and-usage-examples
 featured: false
 draft: false
 tags:

@@ -2,7 +2,7 @@
 author: Dan Isaacs
 pubDatetime: 2022-03-05T15:22:00Z
 title: Guess Who's Back? Alloy's Back
-postSlug: guesswhosback
+postSlug: guess-whos-back-alloys-back
 featured: false
 draft: false
 tags:

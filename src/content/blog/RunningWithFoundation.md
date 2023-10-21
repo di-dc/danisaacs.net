@@ -2,7 +2,7 @@
 author: Dan Isaacs
 pubDatetime: 2022-02-16T15:22:00Z
 title: Running with Foundation
-postSlug: runningwithfoundation
+postSlug: running-with-foundation
 featured: false
 draft: false
 tags:

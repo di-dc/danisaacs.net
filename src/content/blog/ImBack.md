@@ -2,7 +2,7 @@
 author: Dan Isaacs
 pubDatetime: 2023-07-20T15:22:00Z
 title: I'm Back!
-postSlug: imback
+postSlug: im-back
 featured: false
 draft: false
 tags:
