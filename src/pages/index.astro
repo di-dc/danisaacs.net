@@ -6,17 +6,17 @@ import Footer from "@components/Footer.astro";
 import LinkButton from "@components/LinkButton.astro";
 import Hr from "@components/Hr.astro";
 import Card from "@components/Card";
-import Socials from "@components/Socials.astro";
+// import Socials from "@components/Socials.astro";
 import getSortedPosts from "@utils/getSortedPosts";
-import slugify from "@utils/slugify";
-import { SOCIALS } from "@config";
+// import { SOCIALS } from "@config";
 
 const posts = await getCollection("blog");
 
 const sortedPosts = getSortedPosts(posts);
 const featuredPosts = sortedPosts.filter(({ data }) => data.featured);
+const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
 
-const socialCount = SOCIALS.filter(social => social.active).length;
+// const socialCount = SOCIALS.filter(social => social.active).length;
 ---
 
 <Layout>
@@ -40,12 +40,8 @@ const socialCount = SOCIALS.filter(social => social.active).length;
         </svg>
       </a>
 
-      <p>
-        Hello. My name is Dan Isaacs.
-      </p>
-      <p>
-        Sometimes I do things on the computer.
-      </p>
+      <p>Hello. My name is Dan Isaacs.</p>
+      <p>Sometimes I do things on the computer.</p>
       <!-- {
         // only display if at least one social link is enabled
         socialCount > 0 && (
@@ -65,49 +61,50 @@ const socialCount = SOCIALS.filter(social => social.active).length;
           <section id="featured">
             <h2>Featured</h2>
             <ul>
-              {featuredPosts.map(({ data }) => (
+              {featuredPosts.map(({ data, slug }) => (
                 <Card
-                  href={`/${slugify(data)}`}
+                  href={`/posts/${slug}/`}
                   frontmatter={data}
                   secHeading={false}
                 />
               ))}
             </ul>
           </section>
-          <Hr />
+          {recentPosts.length > 0 && <Hr />}
         </>
       )
     }
 
-    <section id="recent-posts">
-      <h2>Recent Posts</h2>
-      <ul>
-        {
-          sortedPosts
-            .filter(({ data }) => !data.featured)
-            .map(
-              ({ data }, index) =>
+    {
+      recentPosts.length > 0 && (
+        <section id="recent-posts">
+          <h2>Recent Posts</h2>
+          <ul>
+            {recentPosts.map(
+              ({ data, slug }, index) =>
                 index < 4 && (
                   <Card
-                    href={`/${slugify(data)}`}
+                    href={`/posts/${slug}/`}
                     frontmatter={data}
                     secHeading={false}
                   />
                 )
-            )
-        }
-      </ul>
-      <div class="all-posts-btn-wrapper">
-        <LinkButton href="/posts">
-          All Posts
-          <svg xmlns="http://www.w3.org/2000/svg"
-            ><path
-              d="m11.293 17.293 1.414 1.414L19.414 12l-6.707-6.707-1.414 1.414L15.586 11H6v2h9.586z"
-            ></path>
-          </svg>
-        </LinkButton>
-      </div>
-    </section>
+            )}
+          </ul>
+        </section>
+      )
+    }
+
+    <div class="all-posts-btn-wrapper">
+      <LinkButton href="/posts/">
+        All Posts
+        <svg xmlns="http://www.w3.org/2000/svg"
+          ><path
+            d="m11.293 17.293 1.414 1.414L19.414 12l-6.707-6.707-1.414 1.414L15.586 11H6v2h9.586z"
+          ></path>
+        </svg>
+      </LinkButton>
+    </div>
   </main>
 
   <Footer />
