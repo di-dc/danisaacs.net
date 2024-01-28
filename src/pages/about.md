@@ -13,4 +13,4 @@ Whatever I feel like writing about, really. But it'll probably lean towards tech
 
 ## How is this built?
 
-This website is built on [Astro](https://astro.build/) using the [AstroPaper](https://astro-paper.pages.dev/) blog theme, and is hosted on [Vercel](https://vercel.com/).
+This website is built on [Astro](https://astro.build/) using the [AstroPaper](https://astro-paper.pages.dev/) blog theme, and is currently hosted on [Netlify](https://netlify.com/).
