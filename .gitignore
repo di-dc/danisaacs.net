@@ -1,5 +1,6 @@
 # build output
 dist/
+.output/
 
 # dependencies
 node_modules/
@@ -17,12 +18,21 @@ pnpm-debug.log*
 # macOS-specific files
 .DS_Store
 
-# personal preference
-package-lock.json
-
-# Starting with Astro 2.0, Astro generates .astro directories for "content
-# collections", which the doc advised to ignore
+# ignore .astro directory
 .astro
 
-# misc
-.vscode/
+# ignore Jampack cache files
+.jampack/
+
+# yarn
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+.pnp.*
+
+
+# personal preference
+package-lock.json

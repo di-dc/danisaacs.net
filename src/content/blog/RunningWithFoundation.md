@@ -2,14 +2,13 @@
 author: Dan Isaacs
 pubDatetime: 2022-02-16T15:22:00Z
 title: Running with Foundation
-postSlug: running-with-foundation
+slug: running-with-foundation
 featured: false
 draft: false
 tags:
   - optimizely
   - foundation
-description: 
-  Get started with the Foundation reference architecture
+description: Get started with the Foundation reference architecture
 ---
 
 ## Table of contents
@@ -103,7 +102,6 @@ First, create a publish folder -- I created it in the root repository folder (_\
 
 _\\foundation\\publish_
 
-  
 Now, open a command line (I like Powershell, myself).
 
 1.  Switch to the site root directory: _c:\\whatever\\your\\path\\is\\foundation_
@@ -111,7 +109,6 @@ Now, open a command line (I like Powershell, myself).
 
     _dotnet publish -c Debug -o .\\publish /p:EnvironmentName=Development_
 
-  
 (Once you have your site up and running, subsequent publishes can be tricky – I'm going to include some notes at the bottom of this article around that, but for now this should be all you need.)
 
 ### Set up the site in IIS
@@ -121,10 +118,8 @@ We're almost there! (Note to self (left publicly to remind me later): maybe this
 1.  Create a new site (right click "Sites" and select "Add Website…")
 2.  Site name: foundation-net5 \[you can use anything you want here\]
 3.  Physical path: full path to the “publish” folder created in the earlier step
-4.  Host name: the url you want to use to access the site.  
-      
-    Fun tip: if you’re just interested in setting the site up in IIS but don’t need to access it externally --  
-      
+4.  Host name: the url you want to use to access the site.
+    Fun tip: if you’re just interested in setting the site up in IIS but don’t need to access it externally --
     If you use the domain "mysite.localmachine.name" (substituting anything for "mysite"), you can set it up locally in IIS without needing to update your hosts file. For example, I used foundation-net5.localmachine.name. (For more info -- [https://www.david-tec.com/2013/07/Never-edit-your-hosts-file-again-when-working-on-localhost/](https://www.david-tec.com/2013/07/Never-edit-your-hosts-file-again-when-working-on-localhost/) -- thanks, David!)
 
 When you created the site, it will have automatically created an app pool. You're going to need to update the Application Pool settings to avoid errors with OpenIDConnect:
@@ -155,7 +150,6 @@ Get a “WindowsCryptographicException” when you try to load the site? Double 
 
     \[webpack-cli\] SyntaxError: Invalid regular expression: /(\\p{Uppercase\_Letter}+|\\p{Lowercase\_Letter}|\\d)(\\p{Uppercase\_Letter}+)/: Invalid escape
 
-  
 Make sure you're on a recent version of Node.
 
 #### Don't see anything?
@@ -168,15 +162,15 @@ Make sure your monitor is on.
 
 After the site is running under IIS, for subsequent publish commands you need to stop the site’s application pool before publishing. Otherwise, the files are locked by the app pool, and it will not deploy correctly.
 
-To avoid this issue, you can manually add a file called “app\_offline.htm” to the publish directory before publishing – this tells IIS to release the files.
+To avoid this issue, you can manually add a file called “app_offline.htm” to the publish directory before publishing – this tells IIS to release the files.
 
 To automate this process: create a Powershell script called "_publish.ps1_" and put it in the root _/foundation_ folder. Add the following lines to the file:
 
 ```powershell
-$pathToApp = '.\publish' 
-New-Item -Path $pathToApp -Name "app_offline.htm" -ItemType "file" 
-dotnet publish -c Debug -o $pathToApp /p:EnvironmentName=Development 
-Remove-Item -Path $pathToApp\app_offline.htm 
+$pathToApp = '.\publish'
+New-Item -Path $pathToApp -Name "app_offline.htm" -ItemType "file"
+dotnet publish -c Debug -o $pathToApp /p:EnvironmentName=Development
+Remove-Item -Path $pathToApp\app_offline.htm
 ```
 
 Adjust the path in the first line as needed, based on your publish folder location. Run this script from Powershell via the command “_.\\publish.ps1_” whenever you want to publish the site, instead of just the standard _dotnet publish_ command we used earlier.
@@ -185,13 +179,11 @@ Adjust the path in the first line as needed, based on your publish folder locati
 
 Want to change the port the site runs on locally? Update the “applicationUrl” setting in the launchSettings.json file (_\\src\\Foundation\\Properties\\launchSettings.json_)
 
-  
 For example, to use port 8000, change that line to:
 
 _"applicationUrl": "https://localhost:8001;http://localhost:8000"_
 
-Conclusions
------------
+## Conclusions
 
 Hopefully this (much longer than I meant to) post will help you get the .NET 5 version of Foundation up and running locally. Have any questions? Feel free to reach out. Find an issue? Create an issue in the GitHub repo. Wish this article had more fun images? Me too friend, me too.
 

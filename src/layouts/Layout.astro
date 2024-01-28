@@ -1,8 +1,7 @@
 ---
-import { SITE } from "@config";
+import { LOCALE, SITE } from "@config";
 import "@styles/base.css";
 import { ViewTransitions } from "astro:transitions";
-import Umami from "@components/Umami.astro";
 
 const googleSiteVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
 
@@ -12,6 +11,9 @@ export interface Props {
   description?: string;
   ogImage?: string;
   canonicalURL?: string;
+  pubDatetime?: Date;
+  modDatetime?: Date | null;
+  scrollSmooth?: boolean;
 }
 
 const {
@@ -20,6 +22,9 @@ const {
   description = SITE.desc,
   ogImage = SITE.ogImage,
   canonicalURL = new URL(Astro.url.pathname, Astro.site).href,
+  pubDatetime,
+  modDatetime,
+  scrollSmooth = false,
 } = Astro.props;
 
 const socialImageURL = new URL(
@@ -29,9 +34,11 @@ const socialImageURL = new URL(
 ---
 
 <!doctype html>
-<html lang="en">
+<html
+  lang=`${LOCALE.lang ?? "en"}`
+  class={`${scrollSmooth && "scroll-smooth"}`}
+>
   <head>
-    <Umami dataId="78b453b4-05ac-4a7f-9f2b-0bdcd96b950b" site="https://a.danisaacs.net/imamu" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -50,6 +57,24 @@ const socialImageURL = new URL(
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:image" content={socialImageURL} />
+
+    <!-- Article Published/Modified time -->
+    {
+      pubDatetime && (
+        <meta
+          property="article:published_time"
+          content={pubDatetime.toISOString()}
+        />
+      )
+    }
+    {
+      modDatetime && (
+        <meta
+          property="article:modified_time"
+          content={modDatetime.toISOString()}
+        />
+      )
+    }
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
