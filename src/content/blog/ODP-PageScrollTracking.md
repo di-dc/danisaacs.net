@@ -178,15 +178,17 @@ _How to best use it? Show modal on exit-intent, if you haven't read >= 90%?_
 
 ### Create a Report
 
-Here's a sample report to track scroll activities for a page:
+Here's a sample report to show scroll activities for all pages:
 
 **TODO: SCREENSHOT OF REPORT**
 
+**NOTE: SET UP ADDITIONAL ROCKET COLUMNS AS RATIOS VS 25% -- # of 90%/# of 25% == % of readers that read 90%**
+
 The caculated columns are based on:
 
-**TODO: ADD DETAILS ABOUT COLUMNS IN REPORT**
+**TODO: ADD DETAILS ABOUT ROCKET COLUMNS IN REPORT**
 
-Important note for reading this report: the 25% column represents _everyone_ who scrolled 25%, not just people who stopped there. In other words, the 25% column also includes people who continued to scroll 50%, 75%, etc.
+Important note for reading this report: the 25% column represents _everyone_ who scrolled 25%, not just people who stopped there -- if a visitor scrolled 75% of the page, that will add one each to the counts for 25%, 50% and 75%. Or, in other words, the 25% column also includes people who continued to scroll 50%, 75%, etc.
 
 ### Create a Real-Time Segment
 
@@ -194,8 +196,22 @@ Ex: Scrolled 25%, but never more than that _\[NOTE: this might not work bc of bu
 
 ## Conclusion
 
-_write about the benefits + use-cases of page scroll tracking_
+_write about the benefits + use-cases + shortcomings of page scroll tracking_
+
+- benefits:
+  - one step to understanding your visitors' engagement with your content -- identify shortcomings in the opening content of articles
+  - create segments to target visitors that only read part of the content
+  - identify places to try an A/B test to improve content performance
+- shortcomings:
+  - should be part of overall strategy, not simply reviewed on its own. Ex:
+    - scroll depth + time on page/bounce rate -- if people are just quickly scrolling then jumping (or just bouncing without scrolling), no good
+    - scroll depth + conversion rate -- high conversion rate, don't really care about the scroll depth
 
 _same approach for other types of tracking_
 
 _link back to previous articles, resources -- or have that in separate section?_
+
+_other references about page scroll tracking_
+
+- https://www.hotjar.com/blog/scroll-tracking/
+- https://www.woopra.com/blog/scroll-depth
