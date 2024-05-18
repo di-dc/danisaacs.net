@@ -1,6 +1,6 @@
 ---
 author: Dan Isaacs
-pubDatetime: 2024-05-15T15:22:00Z
+pubDatetime: 2024-05-17T15:22:00Z
 title: Optimizely Data Platform (ODP) Page Scroll Tracking
 slug: odp-page-scroll-tracking
 featured: false
@@ -34,9 +34,9 @@ Most of this script is pretty standard javascript -- the key piece I'll focus on
 
 ```js
 zaius.event("navigation", {
-  action: "scroll",
+  action: "scroll25",
   scroll_depth: 25,
-  campaign: "Scroll depth: 25% (" + pagePath + ")",
+  campaign: "Page scroll depth: 25% (" + pagePath + ")",
 });
 ```
 
@@ -51,12 +51,12 @@ With the ODP snippet in place, the visitor identifier (VUID) is automatically in
 In this case:
 
 - Event Type == "navigation"
-- Event Action == "scroll"
-- And it's setting the "scroll_depth" variable (that we created earlier) to "25"
+- Event Action == "scroll25"
+- And it's setting the "scroll_depth" field (that we created earlier) to "25"
 
 The rest of the call about the campaign is just to define what shows up in the ODP UI for this event. It isn't required, but it makes things look a little nicer when you're browsing a profile:
 
-![Adding scroll depth field](../../assets/blog/ODP-PageScrollTracking/profile-event-scroll_50-labels.png)
+![Profile scroll event](../../assets/blog/ODP-PageScrollTracking/profile-event-scroll_50-labels.png)
 
 So, all that said, here's the full script I'm using. Note the commented out lines for logging (_console.log..._) -- when first setting this up and testing on your site, it may help to uncomment those, so you can see in the browser when those scroll events are firing.
 
@@ -67,6 +67,7 @@ So, all that said, here's the full script I'm using. Note the commented out line
  *    Core script via: https://docs.developers.optimizely.com/web-experimentation/docs/custom-event-tracking#scroll-depth
  */
 // Variables to prevent continuous firing of custom events
+let hasFiredScrollEvent = false;
 let hasFiredScroll25Event = false;
 let hasFiredScroll50Event = false;
 let hasFiredScroll75Event = false;
@@ -83,60 +84,66 @@ function handleScrollEvent() {
   const scrollPercent = (window.scrollY / (bodyHeight - windowHeight)) * 100;
   window.optimizely = window.optimizely || [];
   // Conditional code we'll use to fire events based on scrollPercentage.
-  if (scrollPercent >= 25 && !hasFiredScroll25Event) {
+  if (!hasFiredScrollEvent) {
     // Push an event to ODP
     zaius.event("navigation", {
       action: "scroll",
-      scroll_depth: 25,
-      campaign: "Scroll depth: 25% (" + pagePath + ")",
+      campaign: "Initial page scroll (" + pagePath + ")",
     });
-    //console.log("ODP 25% scroll event");
+    // console.log("ODP initial scroll event");
+    hasFiredScroll25Event = true;
+  }
+  if (scrollPercent >= 25 && !hasFiredScroll25Event) {
+    zaius.event("navigation", {
+      action: "scroll25",
+      scroll_depth: 25,
+      campaign: "Page scroll depth: 25% (" + pagePath + ")",
+    });
+    // console.log("ODP 25% scroll event");
     hasFiredScroll25Event = true;
   }
   if (scrollPercent >= 50 && !hasFiredScroll50Event) {
-    // window.optimizely.push({type: "event", eventName: "scroll50"});
     zaius.event("navigation", {
-      action: "scroll",
+      action: "scroll50",
       scroll_depth: 50,
-      campaign: "Scroll depth: 50% (" + pagePath + ")",
+      campaign: "Page scroll depth: 50% (" + pagePath + ")",
     });
-    //console.log("ODP 50% scroll event");
+    // console.log("ODP 50% scroll event");
     hasFiredScroll50Event = true;
   }
   if (scrollPercent >= 75 && !hasFiredScroll75Event) {
-    // window.optimizely.push({type: "event", eventName: "scroll75"});
     zaius.event("navigation", {
-      action: "scroll",
+      action: "scroll75",
       scroll_depth: 75,
-      campaign: "Scroll depth: 75% (" + pagePath + ")",
+      campaign: "Page scroll depth: 75% (" + pagePath + ")",
     });
-    //console.log("ODP 75% scroll event");
+    // console.log("ODP 75% scroll event");
     hasFiredScroll75Event = true;
   }
   if (scrollPercent >= 90 && !hasFiredScroll90Event) {
-    // window.optimizely.push({type: "event", eventName: "scroll90"});
     zaius.event("navigation", {
-      action: "scroll",
+      action: "scroll90",
       scroll_depth: 90,
-      campaign: "Scroll depth: 90% (" + pagePath + ")",
+      campaign: "Page scroll depth: 90% (" + pagePath + ")",
     });
-    //console.log("ODP 90% scroll event");
+    // console.log("ODP 90% scroll event");
     hasFiredScroll90Event = true;
   }
   if (scrollPercent >= 100 && !hasFiredScroll100Event) {
-    // window.optimizely.push({type: "event", eventName: "scroll100"});
     zaius.event("navigation", {
-      action: "scroll",
+      action: "scroll100",
       scroll_depth: 100,
-      campaign: "Scroll depth: 100% (" + pagePath + ")",
+      campaign: "Page scroll depth: 100% (" + pagePath + ")",
     });
-    //console.log("ODP 100% scroll event");
+    // console.log("ODP 100% scroll event");
     hasFiredScroll100Event = true;
   }
 }
 // Add event listener outside the function
 window.addEventListener("scroll", handleScrollEvent);
 ```
+
+Quick tangent: the reason I'm tracking 90% scroll (instead of just skipping to 100%) is because most websites have footers -- we're more interested in how much of an article/landing page someone has seen, not about whether they've scrolled to the absolute bottom of the page. Depending on the size of your site's footer, you may want to tweak that number.
 
 ### Validating the script
 
@@ -154,64 +161,63 @@ Result: you should see multiple events in the Inspector -- the initial pageview,
 
 ## Working With + Activating On Page Scroll Data
 
+So, you've got your data coming in, time to start using it -- activating on it via [real-time segments](https://support.optimizely.com/hc/en-us/articles/10033776446733-Build-real-time-segments-in-ODP) or [building custom reports](https://support.optimizely.com/hc/en-us/articles/4407767160717-Use-custom-reports), for two examples.
+
 ### Create Filters
 
-For working with the data -- activating on it via [real-time segments](https://support.optimizely.com/hc/en-us/articles/10033776446733-Build-real-time-segments-in-ODP) or [building custom reports](https://support.optimizely.com/hc/en-us/articles/4407767160717-Use-custom-reports), for two examples -- there's one other step you can take that'll make your life easier: create some filters.
-
-For a full run-down on filters in ODP, [check the documentation](https://support.optimizely.com/hc/en-us/articles/4407766877709-Manage-filters). The filters I've been using for scroll depth tracking are based on the event attributes described above:
+There's a first step you can take that may make your life easier: create some filters. For a full run-down on filters in ODP, [check the documentation](https://support.optimizely.com/hc/en-us/articles/4407766877709-Manage-filters) (or my previous blog post). The filters I've been using for scroll depth tracking are based on the event attributes described above:
 
 ![ODP Filter - 25% scroll](../../assets/blog/ODP-PageScrollTracking/odp-filter-scroll_25.png)
 
 I've created separate filters for each level of scroll tracking in the script: 25%, 50%, 75%, 90%, and 100%. You can of course update the script (and filters) to track the specific percentages you're interested in.
 
-Quick tangent: the reason I'm tracking 90% scroll (instead of just skipping to 100%) is because most websites have footers -- we're more interested in how much of an article/landing page someone has seen, not about whether they've scrolled to the absolute bottom of the page. Depending on the size of your site's footer, you may want to play with that number.
-
-**TODO: BEHAVIORS**
-
-_Example of creating a behavior for 'scrolled 50% but not 75%'_
-
-_Need to review how the behavior can be used -- can be applied to a segment, or used in a Campaign -- but how to target the behavior for a specific page?_
-
-_How to best use it? Show modal on exit-intent, if you haven't read >= 90%?_
-
-*https://support.optimizely.com/hc/en-us/articles/4407268765581-Manage-behaviors*
-
 ### Create a Report
 
-Here's a sample report to show scroll activities for all pages:
+Now you can leverage those filters to create reports, and get some metrics on page scroll rates. First, here's a sample report to show page scroll counts for all pages:
 
-**TODO: SCREENSHOT OF REPORT**
+![ODP report - page scroll counts](../../assets/blog/ODP-PageScrollTracking/report-odp_page_scroll.png)
 
-**NOTE: SET UP ADDITIONAL ROCKET COLUMNS AS RATIOS VS 25% -- # of 90%/# of 25% == % of readers that read 90%**
+The rocket columns (caculated columns) for this report are built using those filters we set up earlier:
 
-The caculated columns are based on:
-
-**TODO: ADD DETAILS ABOUT ROCKET COLUMNS IN REPORT**
+![ODP report - page scroll counts rocket columns](../../assets/blog/ODP-PageScrollTracking/report-odp_page_scroll-columns.png)
 
 Important note for reading this report: the 25% column represents _everyone_ who scrolled 25%, not just people who stopped there -- if a visitor scrolled 75% of the page, that will add one each to the counts for 25%, 50% and 75%. Or, in other words, the 25% column also includes people who continued to scroll 50%, 75%, etc.
 
+Here's another report example -- this one includes additional metrics, like the percentage of pageviews that scrolled 25% or 90%. Give yourself very quick insights into the success of your pages, and maybe even identify pages you might want to run an A/B test to try to improve performance.
+
+![ODP report - detail page scroll counts](../../assets/blog/ODP-PageScrollTracking/report-odp_page_scroll_detail.png)
+
+And, here's a screenshot showing how those columns are configured:
+
+![ODP report - detail page scroll counts rocket columns](../../assets/blog/ODP-PageScrollTracking/report-odp_page_scroll_detail-columns.png)
+
 ### Create a Real-Time Segment
 
-Ex: Scrolled 25%, but never more than that _\[NOTE: this might not work bc of bugs in ODP RTS + exclusion rules]_
+Now, wouldn't it be great to be able to recognize that a visitor on your website only read 25% of an important campaign landing page, and then immediately target them with personalized content or a modal pop-up? You're in luck -- ODP's real-time segments (RTS) can help you do that.
 
-## Conclusion
+Here's one approach to building an RTS for visitors that have scrolled on the referenced page, but haven't scrolled 50%:
 
-_write about the benefits + use-cases + shortcomings of page scroll tracking_
+![ODP RTS](../../assets/blog/ODP-PageScrollTracking/odp-rts-less_than_50.png)
 
-- benefits:
-  - one step to understanding your visitors' engagement with your content -- identify shortcomings in the opening content of articles
-  - create segments to target visitors that only read part of the content
-  - identify places to try an A/B test to improve content performance
-- shortcomings:
-  - should be part of overall strategy, not simply reviewed on its own. Ex:
-    - scroll depth + time on page/bounce rate -- if people are just quickly scrolling then jumping (or just bouncing without scrolling), no good
-    - scroll depth + conversion rate -- high conversion rate, don't really care about the scroll depth
+Using this approach, you do have to create a different RTS for each page you want to enable. However, with just a little bit of development work, you could have Optimizely CMS use the ODP API to automatically create an RTS when a new page is published.
 
-_same approach for other types of tracking_
+## Conclusions
 
-_link back to previous articles, resources -- or have that in separate section?_
+This was just intended to be an example of another type of tracking, and resulting marketing capabilities, that can be enabled via Optimizely's Data Platform.
 
-_other references about page scroll tracking_
+This is just one step in your quest to understanding your visitors' engagement with your content and identifying shortcomings in the opening content of articles. From there, you can make data-driven decisions, and create segments to target visitors that only read part of the content, and identify places to try an A/B test to improve content performance.
+
+Keep in mind, this should be part of overall content strategy, not simply reviewed on its own. For example, compare the scroll depth data versus bounce rate -- if people are just quickly scrolling then jumping, that doesn't show high engagement. On the flip side, if you have a high conversion rate, low scroll depth rates carry a lot less weight.
+
+But really, this core goal of this blog post is simply to introduce you to another example of custom event tracking to the data platform, and maybe even encourage you to create your own events.
+
+## Resources
+
+Previous post:
+
+- [Optimizely Data Platform (ODP) - Tracking and Usage Examples](/posts/optimizely-data-platform-odp-tracking-and-usage-examples/)
+
+Other references about page scroll tracking:
 
 - https://www.hotjar.com/blog/scroll-tracking/
 - https://www.woopra.com/blog/scroll-depth
