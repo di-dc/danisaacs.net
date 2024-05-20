@@ -37,4 +37,11 @@ export default defineConfig({
     },
   },
   scopedStyleStrategy: "where",
+  redirects: {
+    "/optimizely-data-platform-odp-tracking-and-usage-examples":
+      "/posts/optimizely-data-platform-odp-tracking-and-usage-examples/",
+    "/running-with-foundation": "/posts/running-with-foundation/",
+    "/guess-whos-back-alloys-back": "/posts/guess-whos-back-alloys-back/",
+    "/im-back": "/posts/im-back/",
+  },
 });
