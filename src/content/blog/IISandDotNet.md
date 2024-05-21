@@ -30,6 +30,8 @@ Three options I'm aware of (besides switching from IIS to Kestral or Docker) are
 
 1. Scripting the deployment, and including a step to create an app_offline.htm file before the publish (and then remove it afterwards) -- personally, I use a script pretty similar to the one in this link: https://learn.microsoft.com/en-us/aspnet/core/host-and-deploy/app-offline?view=aspnetcore-8.0#locked-deployment-files
 
+   Note -- if this one's not working for you as-is, one thing to try is increasing the [_shutdownTimeLimit_ config attribute](https://learn.microsoft.com/en-us/aspnet/core/host-and-deploy/iis/web-config?view=aspnetcore-8.0#attributes-of-the-aspnetcore-element).
+
 2. If using WebDeploy, use the "EnableMsDeployAppOffline" setting, which will automatically create and remove the app_offline.htm file mentioned in #1. More details: https://bartwullems.blogspot.com/2021/06/webdeploy-enablemsdeployappoffline.html
 
 3. In .NET 7 and above (and as an experimental feature in .NET 6), there's a new "shadow copy" option for deployments, which "enables the app assemblies to be updated while the app is running by making a copy of the assemblies". I haven't tested this approach yet, but these links should make it pretty clear:
