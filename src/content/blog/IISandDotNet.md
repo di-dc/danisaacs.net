@@ -20,7 +20,7 @@ I just want to publish my dotnet code updates locally -- why won't IIS let me do
 
 This will be a short one -- I mainly just wanted to document a question that I've been asked multiple times. If you're like me, you might still be running ASP.NET Core sites (in my case, it's often [Foundation](https://github.com/episerver/foundation)) under IIS. You've probably encountered an issue where you made some code changes, and then got an error when you tried to publish:
 
-**TODO: ADD SAMPLE SCREENSHOT**
+![IIS publish error due to locked files](../../assets/blog/IISandDotNet/files-locked-publishing-error.png)
 
 So, what next?
 
