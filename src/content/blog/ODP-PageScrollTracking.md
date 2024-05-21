@@ -1,6 +1,7 @@
 ---
 author: Dan Isaacs
 pubDatetime: 2024-05-17T15:22:00Z
+modDatetime: 2024-05-21T15:22:00Z
 title: Optimizely Data Platform (ODP) Page Scroll Tracking
 slug: odp-page-scroll-tracking
 featured: false
@@ -179,7 +180,7 @@ Now you can leverage those filters to create reports, and get some metrics on pa
 
 The rocket columns (caculated columns) for this report are built using those filters we set up earlier:
 
-![ODP report - page scroll counts rocket columns](../../assets/blog/ODP-PageScrollTracking/report-odp_page_scroll-columns.png)
+![ODP report - page scroll counts rocket columns](../../assets/blog/ODP-PageScrollTracking/report-odp_page_scroll-columns-v2.png)
 
 Important note for reading this report: the 25% column represents _everyone_ who scrolled 25%, not just people who stopped there -- if a visitor scrolled 75% of the page, that will add one each to the counts for 25%, 50% and 75%. Or, in other words, the 25% column also includes people who continued to scroll 50%, 75%, etc.
 
@@ -189,7 +190,7 @@ Here's another report example -- this one includes additional metrics, like the 
 
 And, here's a screenshot showing how those columns are configured:
 
-![ODP report - detail page scroll counts rocket columns](../../assets/blog/ODP-PageScrollTracking/report-odp_page_scroll_detail-columns.png)
+![ODP report - detail page scroll counts rocket columns](../../assets/blog/ODP-PageScrollTracking/report-odp_page_scroll_detail-columns-v2.png)
 
 ### Create a Real-Time Segment
 
