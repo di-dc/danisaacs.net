@@ -12,13 +12,13 @@ tags:
 description: Why IIS is locking your files and blocking your publish, and some things you can try to get past it.
 ---
 
-I just want to publish my dotnet code updates locally -- why won't IIS just let me do that?
+I just want to publish my dotnet code updates locally -- why won't IIS let me do that?
 
 ## Table of contents
 
 ## What's the issue?
 
-This will be a short one -- I mainly just wanted to document a question that I've had asked multiple times. If you're like me, you might still be running dotnet core sites (in my case, it's often [Foundation](https://github.com/episerver/foundation)) under IIS. You've probably encountered an issue where you made some code changes, and then got an error when you tried to publish:
+This will be a short one -- I mainly just wanted to document a question that I've been asked multiple times. If you're like me, you might still be running ASP.NET Core sites (in my case, it's often [Foundation](https://github.com/episerver/foundation)) under IIS. You've probably encountered an issue where you made some code changes, and then got an error when you tried to publish:
 
 **TODO: ADD SAMPLE SCREENSHOT**
 
