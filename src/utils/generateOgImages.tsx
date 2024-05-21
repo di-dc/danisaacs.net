@@ -7,13 +7,15 @@ import siteOgImage from "./og-templates/site";
 const fetchFonts = async () => {
   // Regular Font
   const fontFileRegular = await fetch(
-    "https://www.1001fonts.com/download/font/ibm-plex-mono.regular.ttf"
+    // "https://www.1001fonts.com/download/font/ibm-plex-mono.regular.ttf"
+    "https://github.com/IBM/plex/raw/c49422d5079fa082fdea6e879656763766e968c3/IBM-Plex-Mono/fonts/complete/ttf/IBMPlexMono-Regular.ttf"
   );
   const fontRegular: ArrayBuffer = await fontFileRegular.arrayBuffer();
 
   // Bold Font
   const fontFileBold = await fetch(
-    "https://www.1001fonts.com/download/font/ibm-plex-mono.bold.ttf"
+    // "https://www.1001fonts.com/download/font/ibm-plex-mono.bold.ttf"
+    "https://github.com/IBM/plex/raw/c49422d5079fa082fdea6e879656763766e968c3/IBM-Plex-Mono/fonts/complete/ttf/IBMPlexMono-Bold.ttf"
   );
   const fontBold: ArrayBuffer = await fontFileBold.arrayBuffer();
 
