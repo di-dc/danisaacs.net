@@ -91,7 +91,7 @@ function handleScrollEvent() {
       campaign: "Initial page scroll (" + pagePath + ")",
     });
     // console.log("ODP initial scroll event");
-    hasFiredScroll25Event = true;
+    hasFiredScrollEvent = true;
   }
   if (scrollPercent >= 25 && !hasFiredScroll25Event) {
     zaius.event("navigation", {
