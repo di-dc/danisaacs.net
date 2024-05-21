@@ -1,6 +1,6 @@
 ---
 author: Dan Isaacs
-pubDatetime: 2024-05-19T12:05:00Z
+pubDatetime: 2024-05-21T01:39:39.741Z
 title: My First Cloudflare Edge Worker
 slug: cloudflare-edge-worker
 featured: false
