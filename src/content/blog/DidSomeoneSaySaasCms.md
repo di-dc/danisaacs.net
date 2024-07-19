@@ -95,6 +95,6 @@ Your results should be similar to mine:
 
 Annnnd that should be it -- you should now have a SaaS CMS site up, complete with brand-spanking-new Visual Builder feature in addition to on-page preview and all the other great features you'd expect from Optimizely's CMS.
 
-Not gonna lie, I wrote this up after a few birthday beers (sidenote: a company that doesn't acknowledge 15 years of service probably also won't acknowledge silly things like birthdays), but the instructions should be complete + accurate -- I've run through it with multiple Github and Vercel accounts, and was succesful in each attempt.
+Not gonna lie, I wrote this up after a few birthday beers (sidenote: a company that doesn't acknowledge 15 years of service ~~probably~~ also won't acknowledge silly things like birthdays), but the instructions should be complete + accurate -- I've run through it with multiple Github and Vercel accounts, and was succesful in each attempt.
 
 That said -- having issues with the setup? Leave a comment here, or reach out to me or the product team and Optimizely OMVPs [on Slack](https://join.slack.com/t/optimizely-community/shared_invite/zt-2d7yzc9fq-ar0alt2yjXxctndBzjUazw).
