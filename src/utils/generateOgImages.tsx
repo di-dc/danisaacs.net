@@ -1,48 +1,47 @@
-import satori, { type SatoriOptions } from "satori";
 import { Resvg } from "@resvg/resvg-js";
 import { type CollectionEntry } from "astro:content";
 import postOgImage from "./og-templates/post";
 import siteOgImage from "./og-templates/site";
 
-const fetchFonts = async () => {
-  // Regular Font
-  const fontFileRegular = await fetch(
-    // "https://www.1001fonts.com/download/font/ibm-plex-mono.regular.ttf"
-    "https://github.com/IBM/plex/raw/c49422d5079fa082fdea6e879656763766e968c3/IBM-Plex-Mono/fonts/complete/ttf/IBMPlexMono-Regular.ttf"
-  );
-  const fontRegular: ArrayBuffer = await fontFileRegular.arrayBuffer();
+// const fetchFonts = async () => {
+//   // Regular Font
+//   const fontFileRegular = await fetch(
+//     // "https://www.1001fonts.com/download/font/ibm-plex-mono.regular.ttf"
+//     "https://github.com/IBM/plex/raw/c49422d5079fa082fdea6e879656763766e968c3/IBM-Plex-Mono/fonts/complete/ttf/IBMPlexMono-Regular.ttf"
+//   );
+//   const fontRegular: ArrayBuffer = await fontFileRegular.arrayBuffer();
 
-  // Bold Font
-  const fontFileBold = await fetch(
-    // "https://www.1001fonts.com/download/font/ibm-plex-mono.bold.ttf"
-    "https://github.com/IBM/plex/raw/c49422d5079fa082fdea6e879656763766e968c3/IBM-Plex-Mono/fonts/complete/ttf/IBMPlexMono-Bold.ttf"
-  );
-  const fontBold: ArrayBuffer = await fontFileBold.arrayBuffer();
+//   // Bold Font
+//   const fontFileBold = await fetch(
+//     // "https://www.1001fonts.com/download/font/ibm-plex-mono.bold.ttf"
+//     "https://github.com/IBM/plex/raw/c49422d5079fa082fdea6e879656763766e968c3/IBM-Plex-Mono/fonts/complete/ttf/IBMPlexMono-Bold.ttf"
+//   );
+//   const fontBold: ArrayBuffer = await fontFileBold.arrayBuffer();
 
-  return { fontRegular, fontBold };
-};
+//   return { fontRegular, fontBold };
+// };
 
-const { fontRegular, fontBold } = await fetchFonts();
+// const { fontRegular, fontBold } = await fetchFonts();
 
-const options: SatoriOptions = {
-  width: 1200,
-  height: 630,
-  embedFont: true,
-  fonts: [
-    {
-      name: "IBM Plex Mono",
-      data: fontRegular,
-      weight: 400,
-      style: "normal",
-    },
-    {
-      name: "IBM Plex Mono",
-      data: fontBold,
-      weight: 600,
-      style: "normal",
-    },
-  ],
-};
+// const options: SatoriOptions = {
+//   width: 1200,
+//   height: 630,
+//   embedFont: true,
+//   fonts: [
+//     {
+//       name: "IBM Plex Mono",
+//       data: fontRegular,
+//       weight: 400,
+//       style: "normal",
+//     },
+//     {
+//       name: "IBM Plex Mono",
+//       data: fontBold,
+//       weight: 600,
+//       style: "normal",
+//     },
+//   ],
+// };
 
 function svgBufferToPngBuffer(svg: string) {
   const resvg = new Resvg(svg);
@@ -51,11 +50,11 @@ function svgBufferToPngBuffer(svg: string) {
 }
 
 export async function generateOgImageForPost(post: CollectionEntry<"blog">) {
-  const svg = await satori(postOgImage(post), options);
+  const svg = await postOgImage(post);
   return svgBufferToPngBuffer(svg);
 }
 
 export async function generateOgImageForSite() {
-  const svg = await satori(siteOgImage(), options);
+  const svg = await siteOgImage();
   return svgBufferToPngBuffer(svg);
 }
