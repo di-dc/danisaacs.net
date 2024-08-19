@@ -3,10 +3,12 @@ import type { Site, SocialObjects } from "./types";
 export const SITE: Site = {
   website: "https://blog.danisaacs.net/", // replace this with your deployed domain
   author: "Dan Isaacs",
+  profile: "https://www.danisaacs.net/",
   desc: "danisaacs.net: the blog",
   title: "danisaacs.net: the blog",
   ogImage: "astropaper-og.jpg",
   lightAndDarkMode: true,
+  postPerIndex: 4,
   postPerPage: 4,
   scheduledPostMargin: 15 * 60 * 1000, // 15 minutes
 };
