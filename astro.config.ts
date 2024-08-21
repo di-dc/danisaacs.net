@@ -38,6 +38,9 @@ export default defineConfig({
     },
   },
   scopedStyleStrategy: "where",
+  experimental: {
+    contentLayer: true,
+  },
   redirects: {
     "/optimizely-data-platform-odp-tracking-and-usage-examples":
       "/posts/optimizely-data-platform-odp-tracking-and-usage-examples/",
