@@ -19,7 +19,7 @@ description: Running Astro in local dev mode with HTTPS
 
 ## Setup
 
-You can follow the [instructions from storyblock](https://www.storyblok.com/faq/setting-up-https-on-localhost-in-astro), or do the following to take it a step further and avoid an SSL cert error in your browser ([learn more here](https://github.com/liuweiGL/vite-plugin-mkcert)):
+You can follow the [instructions from storyblok](https://www.storyblok.com/faq/setting-up-https-on-localhost-in-astro), or do the following to take it a step further and avoid an SSL cert error in your browser ([learn more here](https://github.com/liuweiGL/vite-plugin-mkcert)):
 
 Install _mkcert_ to your Astro project:
 
