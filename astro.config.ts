@@ -57,16 +57,23 @@ export default defineConfig({
       }),
     },
   },
+  redirects: {
+    "/optimizely-data-platform-odp-tracking-and-usage-examples":
+      "/posts/optimizely-data-platform-odp-tracking-and-usage-examples/",
+    "/running-with-foundation": "/posts/running-with-foundation/",
+    "/guess-whos-back-alloys-back": "/posts/guess-whos-back-alloys-back/",
+    "/im-back": "/posts/im-back/",
+  },
   experimental: {
     preserveScriptOrder: true,
     fonts: [
       {
-        name: "Google Sans Code",
-        cssVariable: "--font-google-sans-code",
+        name: "Oxygen",
+        cssVariable: "--font-oxygen",
         provider: fontProviders.google(),
-        fallbacks: ["monospace"],
-        weights: [300, 400, 500, 600, 700],
-        styles: ["normal", "italic"],
+        fallbacks: ["sans-serif"],
+        weights: [300, 400, 700],
+        styles: ["normal"],
       },
     ],
   },

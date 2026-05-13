@@ -15,6 +15,7 @@ export async function GET() {
       link: getPath(id, filePath),
       title: data.title,
       description: data.description,
+      categories: data.tags,
       pubDate: new Date(data.modDatetime ?? data.pubDatetime),
     })),
   });
