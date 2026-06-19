@@ -12,7 +12,7 @@ tags:
 description: A couple of less-obvious ways I'm using Optimizely's Opal to automate real work across Salesforce, GitHub, and Teams.
 ---
 
-You've probably heard about [Optimizely Opal](https://docs.developers.optimizely.com/platform/opal/overview) by now. And if you've used it, you've probably done the usual stuff: brainstorming, content generation, asking it questions about Optimizely products, etc. All good, all useful.
+You've probably heard about [Optimizely Opal](https://www.optimizely.com/ai) by now. And if you've used it, you've probably done the usual stuff: brainstorming, content generation, asking it questions about Optimizely products, etc. All good, all useful.
 
 But that's not what this post is about. I wanted to share a couple of examples of how I've been using Opal to automate things I was already doing manually (or should've been doing more regularly), and how connecting it to external systems like Salesforce and GitHub is actually quite easy.
 
